@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        var el = Math.floor((Math.random() * 100) + 1);
+        var screenWidth = window.innerWidth;
+        var screenHeight = window.innerHeight;
+        var dir = 25;
+
+        function doe()
+        {
+            var knop = document.getElementById("btn");
+
+
+            if (knop.offsetTop > (screenHeight-100))
+            {
+                dir *= -1;
+            }
+            else if (knop.offsetTop < 5)
+            {
+                dir *= -1;
+            }
+
+            knop.style.left = knop.offsetLeft + dir + "px";
+            knop.style.top =  knop.offsetTop + dir + "px";
+        }
+
+
+
+    </script>
+    <style>
+        #btn
+        {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<button id="btn" onmouseover="doe()"> Click me </button>
+
+
+</body>
+</html>

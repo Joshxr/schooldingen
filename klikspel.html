@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Klikspel</title>
+
+    <style type="text/css">
+        .container {
+			display: flex;
+			height: 800px;
+        }
+
+		.grid {
+            border:2px solid black;
+            width: 150px;
+            height:150px;
+            margin:2px;
+        }
+
+		
+		#knop {
+			width: 150px;
+			height: 150px;
+			border: 2px solid black;
+		}
+
+		#griddo {
+			width: 800px;
+		}
+		
+		body {
+		background-color: grey;
+		}
+    </style>
+
+    <script type="text/javascript">
+
+        var kleur = new Array();
+        kleur[0] = "#FF0000";
+        kleur[1] = "#FFFF00";
+        kleur[2] = "#FF00FF";
+        kleur[3] = "#00FF00";
+        kleur[4] = "#00FFFF";
+        kleur[5] = "#0000FF";
+        kleur[6] = "#880088";
+        kleur[7] = "#008800";
+        kleur[8] = "#000088";
+
+      
+		function shuffle(o)
+		{
+				for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+				return o;
+		}
+
+		function setColors() 
+		{
+		
+		if ( goedgeklikt== false)
+			{
+				
+				scorewrong+1;
+			}
+			
+			goedgeklikt = false;
+				 
+				 
+			shuffle(kleur);
+            document.getElementById("blok1").style.backgroundColor = kleur[0];
+            document.getElementById("blok2").style.backgroundColor = kleur[1];
+            document.getElementById("blok3").style.backgroundColor = kleur[2];
+            document.getElementById("blok4").style.backgroundColor = kleur[3];
+            document.getElementById("blok5").style.backgroundColor = kleur[4];
+            document.getElementById("blok6").style.backgroundColor = kleur[5];
+            document.getElementById("blok7").style.backgroundColor = kleur[6];
+            document.getElementById("blok8").style.backgroundColor = kleur[7];
+            document.getElementById("blok9").style.backgroundColor = kleur[8];
+
+            var randomVal = Math.floor((Math.random() * 9) );
+            document.getElementById("knop").style.backgroundColor = kleur[randomVal];
+        }
+		
+		var scorecorrect = 1;
+		var scorewrong = 1;
+		var timer;
+		var totaltimer ="";
+		var goedgeklikt = false;
+		
+		
+		
+		function increasec()	
+		{
+		
+			++scorecorrect;
+			
+		}
+		
+		function increasew()	
+		{
+		
+			++scorewrong;
+			
+		}
+
+		
+		function startGame() 
+		{
+		
+			setTimer();
+			totaltimer = setInterval(stopGame, 30000);
+			
+		}
+		
+		function stopGame() 
+		{
+			var result = scorecorrect - scorewrong;
+			clearInterval(timer);
+			clearInterval(totaltimer);
+			document.getElementById("result").innerHTML = "Your score: " + result;
+			
+		}
+		
+		function setTimer() 
+		{
+		
+			setColors();
+			timer = setInterval(setColors , 1500)
+		}
+
+
+		
+		
+        function klik(div_id) 
+		{
+			var kleur1 = document.getElementById(div_id).style.backgroundColor;
+			var kleur2 = document.getElementById("knop").style.backgroundColor;
+		
+				if	( kleur1 == kleur2)
+				{
+					document.getElementById("output").style.color = "green";
+					document.getElementById("output").style.fontSize = "30px";
+					document.getElementById("output").innerHTML = "Correct";
+					document.getElementById("scorecorrect").innerHTML = "Correct clicks : " + scorecorrect;
+					increasec();
+					clearInterval(timer);
+					setColors();
+					setTimer();
+					
+				
+				}
+				else {
+					document.getElementById("output").style.color = "red";
+					document.getElementById("output").style.fontSize = "30px";
+					document.getElementById("output").innerHTML = "Wrong";
+					document.getElementById("scorewrong").innerHTML = "Wrong clicks : " + scorewrong;
+					increasew ();
+					setColors();
+				}
+				
+				
+			
+				if (scorecorrect == 26) 
+				{
+			
+					document.getElementById("LUKE").innerHTML = "Nice, you are very pro my friend";
+					document.getElementById("LUKE").style.fontSize = "30px";
+					document.getElementById("LUKE").style.color = "red";
+
+				
+				}
+		
+				else if (scorewrong == 26 ) {
+					document.getElementById("LUKE2").innerHTML = "Wow, youre pretty bad at this";
+					document.getElementById("LUKE2").style.fontSize = "30px";
+					document.getElementById("LUKE2").style.color = "red";
+				
+				
+				}
+		
+			
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+
+		<div id="settings">
+			<b>Settings:</b><br>
+			Aantal loops: <br>
+			Aantal sec/loop: <br>
+			wijzig <br>
+			<button onclick="startGame()">Start the game</button>
+		</div>
+
+		<div id="griddo">
+
+        <div id="blok1" class="grid" onclick="klik('blok1')"></div>
+        <div id="blok2" class="grid" onclick="klik('blok2')"></div>
+        <div id="blok3" class="grid" onclick="klik('blok3')"></div>
+        <div id="blok4" class="grid" onclick="klik('blok4')"></div>
+        <div id="blok5" class="grid" onclick="klik('blok5')"></div>
+        <div id="blok6" class="grid" onclick="klik('blok6')"></div>
+        <div id="blok7" class="grid" onclick="klik('blok7')"></div>
+        <div id="blok8" class="grid" onclick="klik('blok8')"></div>
+        <div id="blok9" class="grid" onclick="klik('blok9')"></div>
+
+		<div id="knop">
+		</div>
+
+
+		</div>
+
+        <div id="score">
+		</div>
+
+		<div id="output">
+		</div>
+		
+		<div id="scorecorrect">
+			Correct clicks : 0
+		</div>
+		<div id="scorewrong">
+			Wrong clicks : 0
+		</div>
+
+		</div>
+</body>
+</html>

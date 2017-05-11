@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #container
+        {
+            position: absolute;
+            border: 1px solid black;
+            width: 450px;
+            height: 330px;
+            top: 100px;
+            left: 100px;
+        }
+
+        #blok
+        {
+            position: relative;
+            top: 0px;
+            left: 0px;
+            background-color: red;
+            width: 30px;
+            height:30px;
+        }
+
+    </style>
+
+    <script>
+        var x = 30;
+        var y = 60;
+        var begin;
+
+        function move()
+        {
+            console.log('ja');
+            var div = document.getElementById("blok");
+            var xrand = div.offsetLeft;
+            var yrand = div.offsetTop;
+
+            if (yrand > 299)
+            {
+                y = -y;
+            }
+
+            if (xrand + 1 + x > 450)
+            {
+                x = -x;
+            }
+
+            else if (yrand + y < 0)
+            {
+                y = -y;
+            }
+
+            else if (xrand + x < 0)
+            {
+                x = -x;
+            }
+
+
+            div.style.left = x + xrand + "px";
+            div.style.top = y + yrand + "px";
+        }
+
+        function startTime()
+        {
+            begin = setInterval(move, 100);
+        }
+
+        function stopTime()
+        {
+            clearInterval(begin);
+        }
+
+    </script>
+</head>
+<body>
+
+<div id="container">
+    <div id="blok" onmouseover="move()"></div>
+</div>
+<button id="start" onclick="startTime()">start</button>
+<button id="stop" onclick="stopTime()">stop</button>
+</body>
+</html>
